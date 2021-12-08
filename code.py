@@ -14,17 +14,15 @@ def divide_to_3_blocks(file_name, number):
         text_file = json.load(file)
         number = int(number)
 
-        if number * 3 > len(text_file):
+        if number > len(text_file):
             print("Неможливо поділити з такою довжиною блока")
         else:
             list_start = text_file[0:number]
             list_middle = index_for_middle(file_name, number)
             list_back = text_file[len(text_file) - number: len(text_file)]
-            list_to_print = []
-            list_to_print.append(list_start)
-            list_to_print.append(list_middle)
-            list_to_print.append(list_back)
-            print(list_to_print)
+            print("Початок: " + list_start)
+            print("Середина: " + str(list_middle))
+            print("Кінець: " + list_back)
 
 def index_for_middle(file, number):
     with open(file, "r") as file_js:
@@ -32,7 +30,7 @@ def index_for_middle(file, number):
         if len(file_py) % 2 == 0:
             index_1 = int((len(file_py) - number) / 2)
             index_2 = int((len(file_py) - 2 + number) / 2)
-            return file_py[index_1:index_2]
+            return file_py[index_1: index_2 + 1]
 
         if len(file_py) % 2 != 0:
             middle_index = (len(file_py) - 1) / 2
@@ -44,7 +42,7 @@ def index_for_middle(file, number):
             if int(middle_index + 1) != int(index_2) + 1:
                 return_list.append(file_py[int((middle_index + 1)) : int(index_2) + 1])
             else:
-                return_list.append(file_py[int((middle_index + 1)): int(index_2) + 2])
+                return_list.append(file_py[int((middle_index + 1)): int(index_2) + 2 ])
             return return_list
 
 divide_to_3_blocks("text.data", 4)
