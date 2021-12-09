@@ -9,9 +9,14 @@
 #       В разі необхідності заокруглення одного чи обох параметрів - дивіться на свій розсуд.
 import json
 
+def print_fun(file_name, to_print):
+    with open(file_name, "w") as file:
+        json.dump(to_print, file)
+
 def divide_to_3_blocks(file_name, number):
     with open(file_name, "r") as file:
-        text_file = json.load(file)
+        text_file = file.read()
+        text_file = text_file.replace('"', '')
         number = int(number)
 
         if number > len(text_file):
@@ -26,7 +31,8 @@ def divide_to_3_blocks(file_name, number):
 
 def index_for_middle(file, number):
     with open(file, "r") as file_js:
-        file_py = json.load(file_js)
+        file_py = file_js.read()
+        file_py = file_py.replace('"', '')
         if len(file_py) % 2 == 0:
             index_1 = int((len(file_py) - number) / 2)
             index_2 = int((len(file_py) - 2 + number) / 2)
@@ -46,5 +52,7 @@ def index_for_middle(file, number):
             return return_list
 
 divide_to_3_blocks("text.data", 4)
+#print_fun("text.data", "Hello World")
+
 
 
