@@ -33,12 +33,12 @@ def index_for_middle(file, number):
     with open(file, "r") as file_js:
         file_py = file_js.read()
         file_py = file_py.replace('"', '')
-        if len(file_py) % 2 == 0:
+        if len(file_py) % 2 == 0 or number % 2 != 0:
             index_1 = int((len(file_py) - number) / 2)
             index_2 = int((len(file_py) - 2 + number) / 2)
             return file_py[index_1: index_2 + 1]
 
-        if len(file_py) % 2 != 0:
+        if len(file_py) % 2 != 0 and number % 2 == 0:
             middle_index = (len(file_py) - 1) / 2
             index_1 = middle_index - number / 2
             index_2 = middle_index + number / 2
@@ -51,7 +51,7 @@ def index_for_middle(file, number):
                 return_list.append(file_py[int((middle_index + 1)): int(index_2) + 2 ])
             return return_list
 
-divide_to_3_blocks("text.data", 4)
+divide_to_3_blocks("text.data", 2)
 #print_fun("text.data", "Hello World")
 
 
