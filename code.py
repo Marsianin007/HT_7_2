@@ -19,16 +19,18 @@ def index_for_middle(file, number):
     with open(file, "r") as file_js:
         file_py = file_js.read()
         file_py = file_py.replace('"', '')
+
         if len(file_py) % 2 == 0 and number % 2 == 0:
             index_1 = int((len(file_py) - number) / 2)
             index_2 = int((len(file_py) - 2 + number) / 2)
             return file_py[index_1: index_2 + 1]
 
+
         if len(file_py) % 2 == 0 and number % 2 != 0:
-            number += 1 #збільшуємо на "1"
-            index_1 = int((len(file_py) - 1) / 2)
-            index_2 = int((len(file_py) + 1) / 2)
-            return file_py[index_1: index_2 + 1]
+            center = int(len(file_py) / 2)
+            index_1 = int((center - number / 2))
+            index_2 = int((center + number / 2))
+            return file_py[index_1 : index_2]
 
         if len(file_py) % 2 != 0 and number % 2 == 0:
             index_1 = int(((len(file_py) - 1) / 2))  #зміщуємо вліво
@@ -36,9 +38,14 @@ def index_for_middle(file, number):
             return file_py[index_1: index_2 + 1]
 
         if len(file_py) % 2 != 0 and number % 2 != 0:
-            index_1 = int((len(file_py) - 1) / 2 - 1)
-            index_2 = int((len(file_py) + 1) / 2)
-            return file_py[index_1: index_2 + 1]
+            center = int(len(file_py) / 2) - 1
+            index_1 = int(center - (number / 2))
+            index_2 = int(center + number / 2)
+            if number != 1:
+                return file_py[index_1 + 1: index_2 + 2]
+            else:
+                return file_py[center + 1]
+
 
 
 def divide_to_3_blocks(file_name, number):
@@ -66,7 +73,7 @@ def divide_to_3_blocks(file_name, number):
 
 
 
-divide_to_3_blocks("text.data", 2)
+divide_to_3_blocks("text.data", 1)
 #print_fun("text.data", "Hello World")
 
 
